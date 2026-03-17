@@ -1,0 +1,89 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #3578e5;
+  --ifm-color-primary-dark: #306cd0;
+  --ifm-color-primary-darker: #2d66c4;
+  --ifm-color-primary-darkest: #2554a1;
+  --ifm-color-primary-light: #538ce9;
+  --ifm-color-primary-lighter: #6297eb;
+  --ifm-color-primary-lightest: #8eb3f2;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #4e8cff;
+  --ifm-color-primary-dark: #3578e5;
+  --ifm-color-primary-darker: #2d66c4;
+  --ifm-color-primary-darkest: #2554a1;
+  --ifm-color-primary-light: #6ea1ff;
+  --ifm-color-primary-lighter: #7fafff;
+  --ifm-color-primary-lightest: #afe2ff;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+}
+
+.hero--primary {
+  --ifm-hero-background-color: #1a1b1e;
+  --ifm-hero-text-color: #ffffff;
+  background: linear-gradient(135deg, #1a1b1e 0%, #2d3436 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.heroBanner {
+  padding: 6rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroBanner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(53, 120, 229, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+[data-theme='light'] .hero--primary {
+  --ifm-hero-background-color: #f8f9fa;
+  --ifm-hero-text-color: #1c1e21;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Sidebar is now visible again as requested */
+aside[class^='theme-doc-sidebar-container'] {
+  display: block !important;
+}
+
+/* Adjust content width to look good with sidebar */
+.container.padding-top--md.padding-bottom--lg {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+/* Reduce Footer Height */
+.footer {
+  padding: 1.5rem 0 !important;
+}
+
+.footer__links {
+  display: none !important;
+}
+
+.footer__copyright {
+  margin-top: 0 !important;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
