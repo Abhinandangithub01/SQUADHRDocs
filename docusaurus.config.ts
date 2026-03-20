@@ -1,12 +1,12 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Squad HR',
-  tagline: 'Comprehensive guides for Attendance, Leave, PMS, LMS, and Settings',
+  title: 'SQUAD HR',
+  tagline: 'Comprehensive guides for Attendance, Leave, Performance, Learning, and Director Settings',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -56,16 +56,49 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
-      respectPrefersColorScheme: true,
-      defaultMode: 'dark',
+      respectPrefersColorScheme: false,
+      defaultMode: 'light',
+      disableSwitch: true,
     },
     navbar: {
-      title: 'Squad HR Docs',
-      logo: {
-        alt: 'Squad HR Logo',
-        src: 'img/logo.png',
-      },
-      items: [],
+      title: 'SQUAD HR',
+      hideOnScroll: false,
+      items: [
+        {
+          href: 'https://www.squad-hr.com/',
+          label: 'Get Started',
+          position: 'right',
+          className: 'get-started-btn',
+        },
+        {
+          to: '/docs/user-guide/attendance/intro',
+          label: 'Attendance',
+          position: 'left',
+        },
+        {
+          to: '/docs/user-guide/leave/intro',
+          label: 'Leave',
+          position: 'left',
+        },
+        {
+          to: '/docs/user-guide/pms/intro',
+          label: 'Performance',
+          position: 'left',
+          className: 'navbar-item--padded',
+        },
+        {
+          to: '/docs/user-guide/lms/intro',
+          label: 'Learning',
+          position: 'left',
+          className: 'navbar-item--padded',
+        },
+        {
+          to: '/docs/admin-guide/intro',
+          label: 'Director',
+          position: 'left',
+          className: 'navbar-item--padded',
+        },
+      ],
     },
     footer: {
       style: 'dark',

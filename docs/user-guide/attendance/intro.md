@@ -25,9 +25,9 @@ The **Attendance module** helps organizations track employee presence, punctuali
     height="400" 
     src="https://www.youtube.com/embed/RU-JANr5GtU" 
     title="Attendance Module Demo"
-    frameborder="0"
+    frameBorder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
+    allowFullScreen>
   </iframe>
 </div>
 

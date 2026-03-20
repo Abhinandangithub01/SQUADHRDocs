@@ -1,61 +1,49 @@
 .features {
-  display: flex;
-  align-items: center;
-  padding: 4rem 0;
   width: 100%;
 }
 
 .featureCard {
-  display: block;
+  display: flex !important;
+  flex-direction: column;
   height: 100%;
-  background: var(--ifm-card-background-color);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   text-decoration: none !important;
   color: inherit !important;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.featureCard:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  border-color: var(--ifm-color-primary);
+  padding: 0 !important;
+  overflow: hidden;
 }
 
 .featureImageContainer {
   width: 100%;
-  height: 180px;
+  height: 200px;
   overflow: hidden;
   position: relative;
+  background-color: var(--dashboard-bg);
 }
 
 .featureImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .featureCard:hover .featureImage {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .featureTitle {
-  margin-top: 1.5rem;
-  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--ifm-color-primary);
 }
 
 .featureDescription {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: var(--ifm-color-content-secondary);
-  margin-top: 0.5rem;
 }
 
-.row.justify-center {
-  justify-content: center;
+.padding-top--md {
+  padding: 1.5rem;
 }
