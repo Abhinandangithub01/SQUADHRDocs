@@ -64,12 +64,7 @@ const config: Config = {
       title: 'SQUAD HR',
       hideOnScroll: false,
       items: [
-        {
-          href: 'https://www.squad-hr.com/',
-          label: 'Get Started',
-          position: 'right',
-          className: 'get-started-btn',
-        },
+
         {
           to: '/docs/user-guide/attendance/intro',
           label: 'Attendance',
@@ -101,9 +96,26 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'dark',
-      links: [],
-      copyright: `Copyright © ${new Date().getFullYear()} Squad HR, Inc.`,
+      style: 'light',
+      links: [
+        {
+          label: 'Privacy',
+          href: '#',
+        },
+        {
+          label: 'Terms',
+          href: '#',
+        },
+        {
+          label: 'Changelog',
+          href: '#',
+        },
+        {
+          label: 'Support',
+          href: '#',
+        },
+      ],
+      copyright: `© ${new Date().getFullYear()} SQUAD HR. All rights reserved.`,
     },
     prism: {
       theme: prismThemes.github,
