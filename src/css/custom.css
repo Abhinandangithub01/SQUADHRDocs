@@ -1,252 +1,935 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Instrument+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --ifm-color-primary: #2563eb;
-  --blue-deep:   #1a3a8f;
-  --blue-mid:    #1e56d4;
-  --blue-bright: #2563eb;
-  --blue-light:  #3b82f6;
-  --blue-pale:   #dbeafe;
-  --white:       #ffffff;
-  --text-dark:   #0f1f4a;
-  --text-mid:    #334d7a;
-  --text-soft:   #6b87b0;
-  --border:      rgba(37,99,235,0.12);
+  --ifm-color-primary: #6941C6;
+  --ifm-font-family-base: 'Inter', sans-serif;
+  --text-main: #101828;
+  --text-muted: #475467;
+  --border-color: #EAECF0;
+  --brand-primary: #6941C6;
 }
-
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-  font-family: 'Instrument Sans', sans-serif;
-  background: var(--white);
-  color: var(--text-dark);
+  font-family: var(--ifm-font-family-base);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url('/img/hero_bg.png');
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
 }
 
-/* ─── ANIMATED BACKGROUND ─── */
-.bg-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
+/* Docusaurus Layout adjustments to act like a blank canvas */
+/* Navbar hidden only on homepage (via <Head> inline style in index.tsx) */
+
+/* Make Docusaurus doc page containers transparent so body bg shows through */
+.main-wrapper,
+.docPage__5DB,
+[class*='docPage'],
+[class*='docMainContainer'],
+[class*='docRoot'],
+.theme-doc-sidebar-container,
+[class*='sidebarViewport'],
+[class*='sidebar_'],
+article {
+  background: transparent !important;
 }
 
-.bg-canvas::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(219,234,254,0.9) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(147,197,253,0.5) 0%, transparent 50%),
-    radial-gradient(ellipse 70% 70% at 50% 100%, rgba(224,238,255,0.8) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(191,219,254,0.4) 0%, transparent 50%),
-    linear-gradient(160deg, #eef5ff 0%, #f0f7ff 40%, #e8f2ff 70%, #dbeafe 100%);
-}
-
-.bg-canvas::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
-
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
-  animation: orbDrift linear infinite;
-  opacity: 0;
-}
-.orb-1 { width:420px;height:420px;background:radial-gradient(circle,rgba(59,130,246,0.18),transparent 70%);top:-100px;left:-80px;animation-duration:18s;animation-delay:0s; }
-.orb-2 { width:360px;height:360px;background:radial-gradient(circle,rgba(96,165,250,0.15),transparent 70%);top:30%;right:-60px;animation-duration:22s;animation-delay:-8s; }
-.orb-3 { width:280px;height:280px;background:radial-gradient(circle,rgba(147,197,253,0.2),transparent 70%);bottom:10%;left:20%;animation-duration:16s;animation-delay:-5s; }
-.orb-4 { width:200px;height:200px;background:radial-gradient(circle,rgba(30,86,212,0.1),transparent 70%);top:60%;right:25%;animation-duration:20s;animation-delay:-12s; }
-
-@keyframes orbDrift {
-  0%  { transform:translate(0,0) scale(1);     opacity:0; }
-  10% { opacity:1; }
-  45% { transform:translate(30px,40px) scale(1.08); }
-  90% { opacity:1; }
-  100%{ transform:translate(0,0) scale(1);     opacity:0; }
-}
-
-.dots-pattern {
-  position:absolute;top:80px;right:60px;width:200px;height:200px;
-  background-image:radial-gradient(circle,rgba(37,99,235,0.12) 1.5px,transparent 1.5px);
-  background-size:18px 18px;border-radius:50%;
-  animation:dotsRotate 30s linear infinite;
-}
-.dots-pattern-2 {
-  position:absolute;bottom:300px;left:40px;width:160px;height:160px;
-  background-image:radial-gradient(circle,rgba(37,99,235,0.1) 1.5px,transparent 1.5px);
-  background-size:16px 16px;
-  animation:dotsRotate 25s linear infinite reverse;
-}
-@keyframes dotsRotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-
-.line-accent {
-  position:absolute;background:linear-gradient(90deg,transparent,rgba(37,99,235,0.12),transparent);
-  height:1px;width:300px;animation:lineFade 4s ease-in-out infinite;
-}
-.line-accent-1{top:35%;left:5%;transform:rotate(-15deg);animation-delay:0s;}
-.line-accent-2{top:55%;right:8%;width:200px;transform:rotate(10deg);animation-delay:2s;}
-@keyframes lineFade{0%,100%{opacity:0}50%{opacity:1}}
-
-/* ─── NAVBAR ─── */
+/* Frosted glassmorphism navbar on doc pages */
 .navbar {
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;padding:0 40px;height:60px;
-  background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  box-shadow:0 1px 24px rgba(37,99,235,0.06);
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-/* Docusaurus specific navbar fixes */
-.navbar__inner { width: 100%; display: flex; align-items: center; }
-.navbar__brand { margin-right: 48px; }
-.navbar__title { display: flex !important; font-size: 0; }
-.navbar__title::before { content: 'SQUAD'; font-size: 1.1rem; color: var(--blue-bright); font-weight: 700; margin-right: 4px; }
-.navbar__title::after { content: 'HR'; font-size: 1.1rem; color: var(--text-dark); font-weight: 600; }
-
-.navbar__link {
-  text-decoration:none !important;color:var(--text-mid) !important;font-size:0.88rem !important;font-weight:500 !important;
-  padding:0 20px !important;height:60px !important;display:flex !important;align-items:center !important;
-  border-bottom:2px solid transparent !important;transition:all 0.2s !important;
+.footer {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.navbar__link:hover { color:var(--blue-bright) !important; }
-.navbar__link--active { color:var(--blue-bright) !important; border-bottom-color:var(--blue-bright) !important; }
-.navbar__link--active::after { display: none !important; }
+/* Base Page */
+.untitled-page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
 
-/* ─── HERO ─── */
-.hero {
-  min-height:100vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  text-align:center;padding:100px 40px 60px;
+.untitled-page-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+/* HERO SECTION */
+.untitled-hero {
+  border-radius: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/img/hero_bg.png') center center;
+  background-size: 150%;
+  animation: bgPanHero 40s ease-in-out infinite alternate;
+  padding: 24px 48px 0;
   position: relative;
-  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-.hero-eyebrow {
-  display:flex;align-items:center;gap:8px;margin-bottom:24px;
-  font-size:0.82rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--blue-bright);
-  animation:fadeUp 0.8s ease forwards;opacity:0;
-}
-.hero-eyebrow .sep{color:var(--blue-light);opacity:0.4;}
-.hero-eyebrow .hr{color:var(--text-dark);}
-
-.hero h1 {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(3rem,6vw,5rem);font-weight:900;
-  line-height:1.08;letter-spacing:-1px;color:var(--blue-deep);margin-bottom:24px;
-  animation:fadeUp 0.8s 0.15s ease forwards;opacity:0;
-}
-.hero-sub {
-  max-width:560px;color:var(--text-soft);font-size:1rem;line-height:1.75;
-  font-weight:400;margin-bottom:44px;
-  animation:fadeUp 0.8s 0.3s ease forwards;opacity:0;
+.custom-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 40px;
 }
 
-.search-wrap {
-  position:relative;width:100%;max-width:580px;
-  animation:fadeUp 0.8s 0.45s ease forwards;opacity:0;
-}
-.search-icon {
-  position:absolute;left:22px;top:50%;transform:translateY(-50%);
-  color:var(--text-soft);font-size:1rem;pointer-events:none;
-}
-.search-input {
-  width:100%;padding:18px 100px 18px 52px;
-  background:rgba(255,255,255,0.95);border:1.5px solid rgba(37,99,235,0.15);
-  border-radius:100px;color:var(--text-dark);font-size:0.95rem;
-  font-family:'Instrument Sans',sans-serif;outline:none;
-  box-shadow:0 4px 24px rgba(37,99,235,0.08),0 1px 3px rgba(0,0,0,0.04);
-  transition:border-color 0.25s,box-shadow 0.25s;
-}
-.search-input::placeholder{color:var(--text-soft);}
-.search-input:focus{
-  border-color:rgba(37,99,235,0.4);
-  box-shadow:0 4px 32px rgba(37,99,235,0.14),0 0 0 4px rgba(37,99,235,0.06);
-}
-.search-btn {
-  position:absolute;right:8px;top:50%;transform:translateY(-50%);
-  background:linear-gradient(135deg,var(--blue-bright),var(--blue-mid));
-  color:#fff;border:none;border-radius:100px;padding:10px 22px;
-  font-size:0.82rem;font-weight:600;cursor:pointer;
-  font-family:'Instrument Sans',sans-serif;
-  transition:opacity 0.2s,transform 0.2s;
-  box-shadow:0 2px 12px rgba(37,99,235,0.3);
-}
-.search-btn:hover{opacity:0.9;transform:translateY(-50%) scale(1.02);}
-
-.quick-links {
-  display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;justify-content:center;
-  animation:fadeUp 0.8s 0.6s ease forwards;opacity:0;
-}
-.quick-link {
-  background:rgba(255,255,255,0.8);border:1px solid rgba(37,99,235,0.15);
-  border-radius:100px;padding:6px 16px;font-size:0.78rem;font-weight:500;
-  color:var(--blue-mid);cursor:pointer;text-decoration:none;
-  transition:background 0.2s,border-color 0.2s;
-}
-.quick-link:hover{background:var(--blue-pale);border-color:rgba(37,99,235,0.3);}
-
-/* ─── DIVIDER ─── */
-.divider{height:1px;margin:0 60px;background:linear-gradient(90deg,transparent,rgba(37,99,235,0.15),transparent);}
-
-/* ─── KNOWLEDGE LIBRARY ─── */
-.library{padding:80px 60px 100px;max-width:1200px;margin:0 auto;}
-.library-header{text-align:center;margin-bottom:56px;}
-.library-header h2{
-  font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);
-  font-weight:800;color:var(--blue-deep);margin-bottom:12px;
-  border:none;
-}
-.library-header p{color:var(--text-soft);font-size:0.95rem;}
-
-.lib-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-
-.lib-card {
-  background:rgba(255,255,255,0.85);border:1px solid rgba(37,99,235,0.1);
-  border-radius:16px;padding:28px 24px;cursor:pointer;
-  transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;
-  backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(37,99,235,0.05);
-}
-.lib-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(37,99,235,0.12);border-color:rgba(37,99,235,0.25);}
-
-.lib-card-icon {
-  width:46px;height:46px;border-radius:12px;background:var(--blue-pale);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.3rem;margin-bottom:16px;transition:background 0.2s;
-}
-.lib-card:hover .lib-card-icon{background:#bfdbfe;}
-.lib-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--blue-deep);margin-bottom:8px;}
-.lib-card p{color:var(--text-soft);font-size:0.83rem;line-height:1.6;margin:0;}
-
-.lib-card-footer{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-top:16px;padding-top:14px;border-top:1px solid var(--border);
-}
-.lib-card-count{font-size:0.75rem;color:var(--text-soft);font-weight:500;}
-.lib-card-arrow{font-size:0.78rem;color:var(--blue-bright);font-weight:600;opacity:0;transition:opacity 0.2s;}
-.lib-card:hover .lib-card-arrow{opacity:1;}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(24px)}
-  to{opacity:1;transform:translateY(0)}
+.custom-navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
 }
 
-@media (max-width: 996px) {
-  .lib-grid { grid-template-columns: repeat(2, 1fr); }
+.custom-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
-@media (max-width: 640px) {
-  .lib-grid { grid-template-columns: 1fr; }
-  .hero { padding: 80px 20px 40px; }
-  .library { padding: 60px 20px 80px; }
-  .divider { margin: 0 20px; }
+.custom-nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.custom-nav-links a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity 0.2s;
+}
+
+.custom-nav-links a:hover {
+  opacity: 1;
+  color: white;
+  text-decoration: none;
+}
+
+.chevron-down {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  margin-bottom: 3px;
+  margin-left: 2px;
+  transition: transform 0.2s ease;
+}
+
+/* ── Modules Dropdown ── */
+.modules-dropdown-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.modules-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--ifm-font-family-base);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+
+.modules-trigger:hover {
+  opacity: 1;
+  color: white;
+}
+
+.modules-chevron {
+  transition: transform 0.2s ease;
+  transform: rotate(45deg);
+  margin-bottom: 3px;
+}
+
+.modules-chevron.open {
+  transform: rotate(-135deg);
+  margin-bottom: -1px;
+}
+
+.modules-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(234, 236, 240, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(16, 24, 40, 0.18), 0 4px 16px rgba(16, 24, 40, 0.08);
+  padding: 12px;
+  width: 520px;
+  z-index: 9999;
+  animation: dropdownFadeIn 0.15s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Arrow pointer */
+.modules-dropdown-panel::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.97);
+  border-left: 1px solid rgba(234, 236, 240, 0.9);
+  border-top: 1px solid rgba(234, 236, 240, 0.9);
+}
+
+.modules-dropdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.modules-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  text-decoration: none !important;
+  color: var(--text-main) !important;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.modules-dropdown-item:hover {
+  background: rgba(105, 65, 198, 0.05);
+  border-color: rgba(105, 65, 198, 0.15);
+  box-shadow: 0 2px 8px rgba(105, 65, 198, 0.08);
+  text-decoration: none !important;
+}
+
+.mdi-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #F4F0FC;
+  color: #6941C6;
+  flex-shrink: 0;
+  border: 1px solid rgba(105, 65, 198, 0.12);
+}
+
+.modules-dropdown-item:hover .mdi-icon {
+  background: #ede8fb;
+}
+
+.mdi-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mdi-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #101828;
+  line-height: 1.3;
+}
+
+.mdi-desc {
+  font-size: 0.75rem;
+  color: #667085;
+  line-height: 1.3;
+}
+
+.custom-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-btn-login {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.nav-btn-create {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 100px;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s;
+}
+
+.nav-btn-create:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 640px;
+  margin: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 60px;
+}
+
+.hero-content h1 {
+  color: white;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content p {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Make the wrapper the actual stylish container */
+.hero-search-wrap {
+  position: relative;
+  max-width: 480px;
+  width: 100%;
+  height: 50px; /* Fixed height for consistent vertical alignment */
+  margin: 0 auto;
+  display: flex;
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 100px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+}
+
+/* Glow on wrapper when focused or hovered inside */
+.hero-search-wrap:focus-within {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.hero-search-wrap .search-icon {
+  position: absolute;
+  left: 20px;
+  top: 14px; /* Perfectly aligned vertically */
+  color: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+}
+
+/* Strip all styling from the Docusaurus/Algolia inner elements so they map cleanly! */
+.hero-search-wrap .navbar__search,
+.hero-search-wrap [class*='searchBarContainer'],
+.hero-search-wrap input,
+.hero-search-wrap .DocSearch-Button {
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important; /* The wrapper handles the radius */
+  color: white !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Position the clear/cancel icon to the right side of the search bar */
+.hero-search-wrap button[class*='clearButton'],
+.hero-search-wrap button.clean-btn {
+  position: absolute !important;
+  right: 16px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  z-index: 10 !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.hero-search-wrap button[class*='clearButton']:hover,
+.hero-search-wrap button.clean-btn:hover {
+  color: white !important;
+}
+
+/* Ensure padding for text to account for our custom icon on the left and clear icon on the right */
+.hero-search-wrap input,
+.hero-search-wrap .DocSearch-Button,
+.hero-search-wrap .navbar__search-input {
+  padding: 0 48px 0 48px !important;
+  font-family: var(--ifm-font-family-base);
+  font-size: 1rem;
+}
+
+.hero-search-wrap input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Hide native default searching icons injected by plugins */
+.hero-search-wrap .DocSearch-Search-Icon,
+.hero-search-wrap [class*='searchIcon_'] {
+  display: none !important;
+}
+
+/* QUICKFIND GRID */
+.quickfind-section {
+  padding: 32px 48px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 32px;
+}
+
+.quickfind-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.qf-card {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  text-decoration: none !important;
+  color: inherit !important;
+  display: block;
+  transition: all 0.2s;
+  background: white;
+}
+
+.qf-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  border-color: #d0d5dd;
+  transform: translateY(-2px);
+}
+
+.qf-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--text-main);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.qf-card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.qf-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* FAQs */
+.faqs-section {
+  padding: 0 48px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border-color);
+  padding: 24px 0;
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--ifm-font-family-base);
+}
+
+.faq-toggle {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-answer {
+  margin-top: 16px;
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.faq-answer p {
+  margin-bottom: 16px;
+}
+
+.faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+.faq-answer a {
+  color: var(--brand-primary);
+  text-decoration: none;
+}
+
+.faq-answer a:hover {
+  text-decoration: underline;
+}
+
+
+@keyframes bgPanBody {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes bgPanHero {
+  0% {
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+/* FLOATING CHAT BUTTON */
+.floating-chat {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 56px;
+  height: 56px;
+  background: #111827;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+  z-index: 100;
+}
+
+.floating-chat:hover {
+  transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .quickfind-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+
+  .custom-navbar-left,
+  .custom-navbar-right {
+    gap: 16px;
+  }
+
+  .custom-nav-links {
+    display: none;
+  }
+
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .quickfind-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .untitled-hero {
+    padding: 24px 16px 60px;
+  }
+}
+
+/* =============================================
+   SEARCH DROPDOWN — Clean Organized View
+   (@easyops-cn/docusaurus-search-local)
+   Uses CSS-module [class*=''] attribute selectors
+   to match hashed class names at runtime.
+   ============================================= */
+
+/* ── CSS custom property overrides ── */
+:root {
+  --search-local-modal-background: #ffffff;
+  --search-local-modal-shadow: 0 8px 32px rgba(16, 24, 40, 0.14), 0 2px 8px rgba(16, 24, 40, 0.08);
+  --search-local-hit-background: #ffffff;
+  --search-local-hit-shadow: 0 1px 4px rgba(16, 24, 40, 0.06);
+  --search-local-hit-color: #101828;
+  --search-local-muted-color: #667085;
+  --search-local-highlight-color: #6941C6;
+  --search-local-hit-active-color: #ffffff;
+  --search-local-modal-width: 500px;
+  --search-local-spacing: 10px;
+  --search-local-hit-height: 60px;
+}
+
+/* ── Dropdown container ── */
+[class*='dropdownMenu'] {
+  background: #ffffff !important;
+  border-radius: 4px !important;
+  border: 1px solid #e0e0e0 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  padding: 0 !important;
+  margin-top: 2px !important;
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  z-index: 9999 !important;
+  /* Prevent hiding under the layout */
+}
+
+/* Optional: Custom scrollbar for Webkit/Blink browsers to look cleaner */
+[class*='dropdownMenu']::-webkit-scrollbar {
+  width: 6px;
+}
+
+[class*='dropdownMenu']::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[class*='dropdownMenu']::-webkit-scrollbar-thumb {
+  background-color: #A0A0A0;
+  border-radius: 10px;
+}
+
+[class*='dropdownMenu']::-webkit-scrollbar-thumb:hover {
+  background-color: #707070;
+}
+
+/* ── Specifically for the Hero Search Bar dropdown to ensure it's centered and matches background ── */
+.hero-search-wrap [class*='dropdownMenu'] {
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+  margin-top: 4px !important;
+  background: rgba(30, 30, 30, 0.4) !important;
+  /* Translucent dark glass */
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+}
+
+/* Scrollbar overrides for the hero glass dropdown */
+.hero-search-wrap [class*='dropdownMenu']::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.hero-search-wrap [class*='dropdownMenu']::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ── Each suggestion row ── */
+[class*='dropdownMenu'] [class*='suggestion'] {
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+  height: auto !important;
+  min-height: 48px !important;
+  padding: 12px 16px !important;
+  margin-bottom: 0 !important;
+  transition: background 0.1s ease, color 0.1s ease !important;
+  align-items: center !important;
+}
+
+/* Glass effect specifically for suggestion rows in the hero dropdown */
+.hero-search-wrap [class*='dropdownMenu'] [class*='suggestion'] {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+[class*='dropdownMenu'] [class*='suggestion']:last-child {
+  border-bottom: none !important;
+}
+
+/* Hover state global */
+[class*='dropdownMenu'] [class*='suggestion']:not([class*='cursor']):hover {
+  background: #f9f9f9 !important;
+  border-bottom-color: #f0f0f0 !important;
+}
+
+/* Hover state glass */
+.hero-search-wrap [class*='dropdownMenu'] [class*='suggestion']:not([class*='cursor']):hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Active / keyboard-selected state global */
+[class*='dropdownMenu'] [class*='cursor'] {
+  background: #f4f8ff !important;
+  border-bottom-color: #f0f0f0 !important;
+}
+
+/* Active / keyboard-selected state glass */
+.hero-search-wrap [class*='dropdownMenu'] [class*='cursor'] {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-bottom-color: transparent !important;
+}
+
+/* ── Hide extra icons for a clean list look ── */
+[class*='hitIcon'],
+[class*='hitTree'],
+[class*='hitAction'],
+[class*='hitPath'] {
+  display: none !important;
+}
+
+/* ── Text wrapper ── */
+[class*='hitWrapper'] {
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* ── Result title ── */
+[class*='hitTitle'] {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  color: #333333 !important;
+  line-height: 1.4 !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+/* Glass effect title */
+.hero-search-wrap [class*='hitTitle'] {
+  color: #ffffff !important;
+}
+
+/* ── Breadcrumb / module path ── */
+[class*='hitPath'] {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: 400 !important;
+  color: #667085 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  flex-wrap: wrap !important;
+  /* Let paths wrap if too long */
+  white-space: normal !important;
+  line-height: 1.3 !important;
+}
+
+/* ── Keyword highlight mark ── */
+[class*='hitWrapper'] mark {
+  background: none !important;
+  color: #6941C6 !important;
+  font-weight: 700 !important;
+}
+
+/* Glass highlight mark override */
+.hero-search-wrap [class*='hitWrapper'] mark {
+  color: #cbb4fc !important;
+}
+
+/* Active row: global invert text to white */
+[class*='cursor'] [class*='hitTitle'],
+[class*='cursor'] [class*='hitPath'],
+[class*='cursor'] [class*='hitIcon'],
+[class*='cursor'] [class*='hitTree'] {
+  color: #ffffff !important;
+}
+
+[class*='cursor'] [class*='hitWrapper'] mark {
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-decoration: underline;
+}
+
+/* ── Enter / action arrow icon ── */
+[class*='hitAction'] {
+  color: #98A2B3 !important;
+  flex-shrink: 0;
+  width: 18px !important;
+  height: 18px !important;
+  opacity: 0.6;
+}
+
+[class*='cursor'] [class*='hitAction'] {
+  color: rgba(255, 255, 255, 0.8) !important;
+  opacity: 1;
+}
+
+/* ── "See all results" footer link ── */
+[class*='hitFooter'] {
+  margin-top: 8px !important;
+  padding-top: 8px !important;
+  border-top: 1px solid #EAECF0 !important;
+  text-align: center !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.8rem !important;
+}
+
+[class*='hitFooter'] a {
+  color: #6941C6 !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  transition: opacity 0.15s;
+}
+
+[class*='hitFooter'] a:hover {
+  opacity: 0.75 !important;
+  text-decoration: underline !important;
+}
+
+/* ── No results state ── */
+[class*='noResults'] {
+  padding: 32px 16px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.9rem !important;
+  color: #667085 !important;
+  text-align: center !important;
+}
+
+[class*='noResultsIcon'] {
+  color: #D0D5DD !important;
+  margin-bottom: 8px !important;
+}
+
+/* ── Search result page (full results /search) ── */
+[class*='searchResultItem'] {
+  padding: 16px 0 !important;
+  border-bottom: 1px solid #EAECF0 !important;
+}
+
+[class*='searchResultItem'] h2 {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: #101828 !important;
+  margin-bottom: 4px !important;
+}
+
+[class*='searchResultItem'] h2 mark {
+  background: rgba(105, 65, 198, 0.12) !important;
+  color: #6941C6 !important;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+
+[class*='searchResultItemPath'] {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.75rem !important;
+  color: #667085 !important;
+  margin: 4px 0 !important;
+}
+
+[class*='searchResultItemSummary'] {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.85rem !important;
+  font-style: normal !important;
+  color: #475467 !important;
+  line-height: 1.5 !important;
+  margin-top: 6px !important;
+}
+
+[class*='searchResultItemSummary'] mark {
+  background: rgba(105, 65, 198, 0.12) !important;
+  color: #6941C6 !important;
+  border-radius: 3px;
+  padding: 0 2px;
+  font-style: normal !important;
 }
