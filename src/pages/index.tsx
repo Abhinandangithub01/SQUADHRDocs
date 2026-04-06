@@ -83,13 +83,18 @@ function ModulesDropdown() {
     timeoutRef.current = setTimeout(() => setOpen(false), 120);
   };
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setOpen(!open);
+  };
+
   return (
     <div
       className="modules-dropdown-wrap"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <button className="modules-trigger">
+      <button className="modules-trigger" onClick={handleClick}>
         Modules
         <span className={`chevron-down modules-chevron${open ? ' open' : ''}`} />
       </button>
@@ -113,9 +118,11 @@ function ModulesDropdown() {
 }
 
 function CustomNavbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <nav className="custom-navbar">
-      <div className="custom-navbar-left">
+      <div className="custom-navbar-top">
         <div className="custom-logo">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14.5 2L3 13H11.5L9.5 22L21 11H12.5L14.5 2Z" fill="white" />
@@ -124,15 +131,32 @@ function CustomNavbar() {
             <span>SQUAD</span><span style={{ opacity: 0.7 }}>|</span><span>HR</span>
           </span>
         </div>
+        <button className="mobile-menu-toggle" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle Navigation">
+          {mobileOpen ? (
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          ) : (
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          )}
+        </button>
+      </div>
+
+      <div className={`custom-navbar-collapse ${mobileOpen ? 'open' : ''}`}>
         <div className="custom-nav-links">
           <Link to="/docs/user-guide/attendance/intro">Documentation</Link>
           <ModulesDropdown />
           <Link to="#">Support</Link>
         </div>
-      </div>
-      <div className="custom-navbar-right">
-        <a href="#" className="nav-btn-login">Log in</a>
-        <a href="#" className="nav-btn-create">Dashboard</a>
+        <div className="custom-navbar-right">
+          <a href="#" className="nav-btn-login">Log in</a>
+          <a href="#" className="nav-btn-create">Dashboard</a>
+        </div>
       </div>
     </nav>
   );
@@ -167,7 +191,7 @@ function KnowledgeLibrary() {
   return (
     <section className="quickfind-section">
       <h2 className="section-title">Knowledge Library</h2>
-      <div className="quickfind-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+      <div className="quickfind-grid">
         <Link to="/docs/user-guide/attendance/intro" className="qf-card">
           <div className="qf-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
